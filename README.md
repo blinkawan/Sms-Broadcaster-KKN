@@ -10,9 +10,7 @@ Screenshot
 -------------------
 Di bawah merupakan beberapa screenshot progam  
   
-```
 ![alt text](http://farm3.staticflickr.com/2810/12063709314_44ca6a8efe_z.jpg "Screenshot")
-```
 
 ```
 ![alt text](http://farm6.staticflickr.com/5505/12063848914_ca6e74a935_z.jpg "Screenshot")
