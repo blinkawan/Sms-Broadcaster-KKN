@@ -6,6 +6,23 @@ Sms Broadcaster KKN
 - Program sederhana ini free silahkan diclone atau didownload dan dipelajari
 - Program ini dibuat oleh [agung-setiawan.com](http://agung-setiawan.com "Agung Setiawan")
 
+Teknologi dan Library
+--------------------------
+### Library
+- JDK 1.7
+- Swing
+- MySql JDBC Driver 
+- Icon Make Over
+
+### Sms Engine
+- Gammu for Windows 1.33.0
+
+### Database Engine
+- MySql
+
+### IDE
+- Netbeans 7.3
+
 Screenshot
 -------------------
 Di bawah merupakan beberapa screenshot progam  
