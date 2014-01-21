@@ -17,34 +17,35 @@ public class SentItemService {
     private SentItemRepository sentItemRepository;
     private Connection connection;
     
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) throws SQLException{
         try{
             connection=dataSource.getConnection();
             sentItemRepository=new SentItemRepository();
             sentItemRepository.setConnection(connection);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
     }
     
-    public SentItem findOne(Long id){
+    public SentItem findOne(Long id) throws SQLException{
         try{
             return sentItemRepository.findOne(id);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
-    public List<SentItem> findAll(){
+    public List<SentItem> findAll() throws SQLException{
         try{
             return sentItemRepository.findAll();
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
     public void delete(Long id){
@@ -56,6 +57,7 @@ public class SentItemService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }

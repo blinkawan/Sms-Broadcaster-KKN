@@ -34,9 +34,13 @@ public class DialogTambahKontak extends javax.swing.JDialog {
         jLabel.setBounds(0, 0, 588, 420);
         this.add(jLabel);
         
-        List<Grup> grups= App.getGrupService().findAll();
-        for(Grup g:grups){
-            jComboBoxGrup.addItem(g);
+        try{
+            List<Grup> grups= App.getGrupService().findAll();
+            for(Grup g:grups){
+                jComboBoxGrup.addItem(g);
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Grup");
         }
     }
 

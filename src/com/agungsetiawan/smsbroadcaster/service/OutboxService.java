@@ -15,13 +15,14 @@ public class OutboxService {
     private OutboxRepository outboxRepository;
     private Connection connection;
     
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) throws SQLException{
         try{
             connection=dataSource.getConnection();
             outboxRepository=new OutboxRepository();
             outboxRepository.setConnection(connection);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
     }
     
@@ -34,6 +35,7 @@ public class OutboxService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }

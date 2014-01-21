@@ -33,8 +33,7 @@ public class DialogKirimPesan extends javax.swing.JDialog {
         jProgressBarKirim.setIndeterminate(true);
                 
         setLocationRelativeTo(null);
-        dialogPilihNomor=new DialogPilihNomor(null, true);
-        dialogPilihNomor.setDialogKirimPesan(this);
+        
         
         JLabel jLabelBackground=new JLabel();
         jLabelBackground.setIcon(new ImageIcon(FormUtama.class.getResource("wood2.jpg")));
@@ -197,12 +196,16 @@ public class DialogKirimPesan extends javax.swing.JDialog {
                 busy(true);
                 String[] nomors=jTextFieldNomorTujuan.getText().split(";");
 
-                Outbox outbox;
-                for(int i=0;i<nomors.length;i++){
-                    outbox=new Outbox();
-                    outbox.setDestinationNumber(nomors[i]);
-                    outbox.setTextDecoded(jTextAreaPesan.getText());
-                    App.getOutboxService().save(outbox);
+                try{
+                    Outbox outbox;
+                    for(int i=0;i<nomors.length;i++){
+                        outbox=new Outbox();
+                        outbox.setDestinationNumber(nomors[i]);
+                        outbox.setTextDecoded(jTextAreaPesan.getText());
+                        App.getOutboxService().save(outbox);
+                    }
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(rootPane, "Gagal Mengirim Pesan");
                 }
                 
                 return "Pesan Berhasil Dikirim";
@@ -227,6 +230,8 @@ public class DialogKirimPesan extends javax.swing.JDialog {
 
     private void jButtonKirimKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKirimKeActionPerformed
         getRootPane().getGlassPane().setVisible(true);
+        dialogPilihNomor=new DialogPilihNomor(null, true);
+        dialogPilihNomor.setDialogKirimPesan(this);
         dialogPilihNomor.setVisible(true);
         getRootPane().getGlassPane().setVisible(false);
     }//GEN-LAST:event_jButtonKirimKeActionPerformed

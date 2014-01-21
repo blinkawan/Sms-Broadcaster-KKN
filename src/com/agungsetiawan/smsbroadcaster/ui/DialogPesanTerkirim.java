@@ -35,9 +35,14 @@ public class DialogPesanTerkirim extends javax.swing.JDialog {
         jLabel.setBounds(0, 0, 472, 515);
         jPanel1.add(jLabel);
         
-        sentItems=App.getSentItemService().findAll();
-        sentItemTableModel=new SentItemTableModel(sentItems);
-        jTable1.setModel(sentItemTableModel);
+        try{
+            sentItems=App.getSentItemService().findAll();
+             sentItemTableModel=new SentItemTableModel(sentItems);
+            jTable1.setModel(sentItemTableModel);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Pesan Terkirim");
+        }
+        
         setLocationRelativeTo(null);
         
         jScrollPane1.setOpaque(false);
@@ -216,9 +221,13 @@ public class DialogPesanTerkirim extends javax.swing.JDialog {
         getRootPane().getGlassPane().setVisible(true);
         int jawab=JOptionPane.showConfirmDialog(rootPane, "Yakin Akan Menghapus Pesan ?");
         if(jawab==JOptionPane.YES_OPTION){
-             App.getSentItemService().delete(sentItem.getId());
-             sentItemTableModel.delete(row);        
-             JOptionPane.showMessageDialog(rootPane, "Pesan Berhasil dihapus");
+             try{
+                 App.getSentItemService().delete(sentItem.getId());
+                 sentItemTableModel.delete(row);        
+                  JOptionPane.showMessageDialog(rootPane, "Pesan Berhasil dihapus");
+             }catch(Exception ex){
+                 JOptionPane.showMessageDialog(rootPane, "Data Gagal dihapus");
+             }
         }
         getRootPane().getGlassPane().setVisible(false);
        

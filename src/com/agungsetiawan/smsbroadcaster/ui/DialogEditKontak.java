@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agungsetiawan.smsbroadcaster.ui;
 
 import com.agungsetiawan.smsbroadcaster.App;
@@ -46,10 +42,14 @@ public class DialogEditKontak extends javax.swing.JDialog {
         jLabel.setBounds(0, 0, 588, 420);
         this.add(jLabel);
         
-         List<Grup> grups= App.getGrupService().findAll();
+         try{
+             List<Grup> grups= App.getGrupService().findAll();
             for(Grup g:grups){
                 jComboBoxGrup.addItem(g);
             }
+         }catch(Exception ex){
+             JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Grup");
+         }
     }
 
     /**
@@ -139,11 +139,15 @@ public class DialogEditKontak extends javax.swing.JDialog {
         Grup grup=(Grup) jComboBoxGrup.getSelectedItem();
         kontak.setGrup(grup);
 
-        App.getKontakService().update(kontak);
-        dialogKontak.getKontakTableModel().update(row, kontak);
+        try{
+            App.getKontakService().update(kontak);
+            dialogKontak.getKontakTableModel().update(row, kontak);
 
-        JOptionPane.showMessageDialog(rootPane, "Data Berhasil diperbaharui");
-        this.dispose();
+            JOptionPane.showMessageDialog(rootPane, "Data Berhasil diperbaharui");
+            this.dispose();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Gagal Mengubah Data");
+        }
     }//GEN-LAST:event_jButtonSimpanActionPerformed
 
     /**

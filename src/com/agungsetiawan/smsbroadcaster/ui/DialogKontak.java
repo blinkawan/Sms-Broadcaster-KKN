@@ -36,8 +36,13 @@ public class DialogKontak extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        kontakTableModel=new KontakTableModel(App.getKontakService().findAll());
-        jTable1.setModel(kontakTableModel);
+       try{
+            kontakTableModel=new KontakTableModel(App.getKontakService().findAll());
+            jTable1.setModel(kontakTableModel);
+       }catch(Exception ex){
+           JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Kontak");
+       }
+       
         setLocationRelativeTo(null);
         
         JLabel jLabel=new JLabel();
@@ -161,9 +166,13 @@ public class DialogKontak extends javax.swing.JDialog {
         getRootPane().getGlassPane().setVisible(true);
         int jawab=JOptionPane.showConfirmDialog(rootPane, "Yakin Akan Menghapus Data "+kontak.getNama()+" ?");
         if(jawab==JOptionPane.YES_OPTION){
-            App.getKontakService().delete(kontak.getId());
-            kontakTableModel.delete(row);
-             JOptionPane.showMessageDialog(rootPane, "Data Berhasil dihapus");
+            try{
+                App.getKontakService().delete(kontak.getId());
+                kontakTableModel.delete(row);
+                JOptionPane.showMessageDialog(rootPane, "Data Berhasil dihapus");
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, "Data Gagal dihapus");
+            }
         }
         getRootPane().getGlassPane().setVisible(false);
     }//GEN-LAST:event_jButtonHapusActionPerformed

@@ -10,6 +10,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -46,28 +47,32 @@ public class App {
         return sentItemService;
     }
     
-    public static void main( String[] args ) throws SQLException{
+    public static void main( String[] args ){
         
         MysqlDataSource dataSource=new MysqlDataSource();
         dataSource.setServerName("localhost");
         dataSource.setUser("root");
         dataSource.setPassword("");
         dataSource.setDatabaseName("sms");
-       
-        grupService=new GrupService();
-        grupService.setDataSource(dataSource);
-       
-        inboxService=new InboxService();
-        inboxService.setDataSource(dataSource);
         
-        kontakService=new KontakService();
-        kontakService.setDataSource(dataSource);
-        
-        outboxService=new OutboxService();
-        outboxService.setDataSource(dataSource);
-        
-        sentItemService=new SentItemService();
-        sentItemService.setDataSource(dataSource);
+        try{
+            grupService=new GrupService();
+            grupService.setDataSource(dataSource);
+
+            inboxService=new InboxService();
+            inboxService.setDataSource(dataSource);
+
+            kontakService=new KontakService();
+            kontakService.setDataSource(dataSource);
+
+            outboxService=new OutboxService();
+            outboxService.setDataSource(dataSource);
+
+            sentItemService=new SentItemService();
+            sentItemService.setDataSource(dataSource);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Error : \n"+ex);
+        }
         
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");

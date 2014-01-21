@@ -19,33 +19,34 @@ public class InboxService {
     private InboxRepository inboxRepository;
     private Connection connection;
     
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) throws SQLException{
         try {
             connection=dataSource.getConnection();
             inboxRepository=new InboxRepository();
             inboxRepository.setConnection(connection);
         } catch (SQLException ex) {
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
     }
     
-    public Inbox findOne(Long id){
+    public Inbox findOne(Long id) throws SQLException{
         try{
             return inboxRepository.findOne(id);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
-    public List<Inbox> findAll(){
+    public List<Inbox> findAll() throws SQLException{
         try{
             return inboxRepository.findAll();
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
 }

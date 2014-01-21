@@ -16,13 +16,14 @@ public class GrupService {
     private GrupRepository grupRepository;
     private Connection connection;
     
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) throws SQLException{
         try{
             connection=dataSource.getConnection();
             grupRepository=new GrupRepository();
             grupRepository.setConnection(connection);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
     }
     
@@ -35,6 +36,7 @@ public class GrupService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -50,30 +52,31 @@ public class GrupService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
         }
     }
     
-    public Grup findOne(Long id){
+    public Grup findOne(Long id) throws SQLException{
         try{
             return grupRepository.findOne(id);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
-    public List<Grup> findAll(){
+    public List<Grup> findAll() throws SQLException{
         try{
             return grupRepository.findAll();
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
     public void delete(Long id){
@@ -85,6 +88,7 @@ public class GrupService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }

@@ -20,13 +20,14 @@ public class KontakService {
     private KontakRepository kontakRepository;
     private Connection connection;
     
-    public void setDataSource(DataSource dataSource){
+    public void setDataSource(DataSource dataSource) throws SQLException{
         try {
             connection=dataSource.getConnection();
             kontakRepository=new KontakRepository();
             kontakRepository.setConnection(connection);
         } catch (SQLException ex) {
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
     }
     
@@ -39,6 +40,7 @@ public class KontakService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -54,6 +56,7 @@ public class KontakService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -69,49 +72,49 @@ public class KontakService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
+                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
         }
     }
     
-    public Kontak findOne(Long id){
+    public Kontak findOne(Long id) throws SQLException{
         try{
             return kontakRepository.findOne(id);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
-    public Kontak findOneByNumber(String number){
+    public Kontak findOneByNumber(String number) throws SQLException{
         try{
             return kontakRepository.findOneByNumber(number);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
-    public List<Kontak> findByGrup(Long id){
+    public List<Kontak> findByGrup(Long id) throws SQLException{
         try{
             return kontakRepository.findByGrup(id);
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
         
-        return null;
     }
     
-    public List<Kontak> findAll(){
+    public List<Kontak> findAll() throws SQLException{
         try{
             return kontakRepository.findAll();
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw new SQLException(ex.toString());
         }
-        
-        return null;
     }
 }

@@ -11,9 +11,9 @@ import java.io.InputStreamReader;
  */
 public class BackgroundService {
     
-    public int checkStatus(){
+    public int checkStatus(String serviceName){
         try {
-            Process process=Runtime.getRuntime().exec("sc query GammuSMSD");
+            Process process=Runtime.getRuntime().exec("sc query "+serviceName);
             BufferedReader reader=new BufferedReader(new InputStreamReader(process.getInputStream())); 
             
             String line;

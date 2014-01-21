@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.agungsetiawan.smsbroadcaster.ui;
 
 import com.agungsetiawan.smsbroadcaster.App;
@@ -96,11 +92,16 @@ public class DialogEditGrup extends javax.swing.JDialog {
         int row=dialogGrup.getjTable1().getSelectedRow();
         Grup grup=dialogGrup.getGrupTableModel().findOne(row);        
         grup.setNama(jTextFieldNama.getText());
-
-        App.getGrupService().update(grup);
-        JOptionPane.showMessageDialog(rootPane, "Data Berhasil diperbaharui");
-        this.dialogGrup.getGrupTableModel().update(row,grup);
-        this.dispose();
+        
+        try{
+            App.getGrupService().update(grup);
+            JOptionPane.showMessageDialog(rootPane, "Data Berhasil diperbaharui");
+            this.dialogGrup.getGrupTableModel().update(row,grup);
+            this.dispose();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Data Gagal diubah");
+        }
+       
 
     }//GEN-LAST:event_jButtonSimpanActionPerformed
 

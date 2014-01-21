@@ -92,10 +92,14 @@ public class DialogTambahGrup extends javax.swing.JDialog {
         Grup grup=new Grup();
         grup.setNama(jTextFieldNama.getText());
         
-        App.getGrupService().save(grup);
-        JOptionPane.showMessageDialog(rootPane, "Data Berhasil disimpan");
-        this.dialogGrup.getGrupTableModel().save(grup);
-        this.dispose();
+       try{
+            App.getGrupService().save(grup);
+            JOptionPane.showMessageDialog(rootPane, "Data Berhasil disimpan");
+            this.dialogGrup.getGrupTableModel().save(grup);
+            this.dispose();
+       }catch(Exception ex){
+           JOptionPane.showMessageDialog(rootPane, "Gagal Menyimpan Data Grup");
+       }
         
     }//GEN-LAST:event_jButtonSimpanActionPerformed
 

@@ -41,8 +41,13 @@ public class DialogGrup extends javax.swing.JDialog {
         jLabel.setBounds(0, 0, 723, 477);
         this.add(jLabel);
         
-        grupTableModel=new GrupTableModel(App.getGrupService().findAll());
-        jTable1.setModel(grupTableModel);
+        try{
+            grupTableModel=new GrupTableModel(App.getGrupService().findAll());
+            jTable1.setModel(grupTableModel);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Grup");
+        }
+        
         
         setLocationRelativeTo(null);
         

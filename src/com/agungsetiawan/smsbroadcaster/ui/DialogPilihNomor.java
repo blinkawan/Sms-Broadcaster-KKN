@@ -35,16 +35,24 @@ public class DialogPilihNomor extends javax.swing.JDialog {
        
         root=new DefaultMutableTreeNode("Pilih Nomor");
         
-        nodeKontak = new DefaultMutableTreeNode("Daftar Kontak");
-        List<Kontak> listKontak= App.getKontakService().findAll();
-        for(Kontak k:listKontak){
-            nodeKontak.add(new DefaultMutableTreeNode(k));
+        try{
+            nodeKontak = new DefaultMutableTreeNode("Daftar Kontak");
+            List<Kontak> listKontak= App.getKontakService().findAll();
+            for(Kontak k:listKontak){
+                nodeKontak.add(new DefaultMutableTreeNode(k));
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Kontak");
         }
         
-        nodeGrup=new DefaultMutableTreeNode("Daftar Grup");
-        List<Grup> grups= App.getGrupService().findAll();
-        for(Grup g:grups){
-            nodeGrup.add(new DefaultMutableTreeNode(g));
+        try{
+            nodeGrup=new DefaultMutableTreeNode("Daftar Grup");
+            List<Grup> grups= App.getGrupService().findAll();
+            for(Grup g:grups){
+                nodeGrup.add(new DefaultMutableTreeNode(g));
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Grup");
         }
         
         root.add(nodeKontak);
@@ -158,10 +166,14 @@ public class DialogPilihNomor extends javax.swing.JDialog {
             Kontak kontak=(Kontak) nodeInfo;
             jTextArea1.append(kontak.getNomor()+";");
         }else if(nodeInfo instanceof Grup){
-            Grup grup=(Grup) nodeInfo;
-            List<Kontak> kontaks= App.getKontakService().findByGrup(grup.getId());
-            for(Kontak kontak:kontaks){
-                jTextArea1.append(kontak.getNomor()+";");
+            try{
+                Grup grup=(Grup) nodeInfo;
+                List<Kontak> kontaks= App.getKontakService().findByGrup(grup.getId());
+                for(Kontak kontak:kontaks){
+                    jTextArea1.append(kontak.getNomor()+";");
+                }
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, "Gagal Memuat Data Kontak");
             }
         }
         
