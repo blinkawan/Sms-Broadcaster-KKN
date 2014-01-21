@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import com.agungsetiawan.smsbroadcaster.custom.JButtonTransparant;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -28,6 +29,8 @@ public class DialogKirimPesan extends javax.swing.JDialog {
     public DialogKirimPesan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        jProgressBarKirim.setIndeterminate(true);
                 
         setLocationRelativeTo(null);
         dialogPilihNomor=new DialogPilihNomor(null, true);
@@ -48,6 +51,18 @@ public class DialogKirimPesan extends javax.swing.JDialog {
                 super.paintComponent(g);
             }
         });
+        
+        busy(false);
+        
+    }
+    
+    private void busy(boolean bool){
+        jTextFieldNomorTujuan.setEnabled(!bool);
+        jTextAreaPesan.setEnabled(!bool);
+        jProgressBarKirim.setVisible(bool);
+        jButtonKirim.setEnabled(!bool);
+        jButtonKirimKe.setEnabled(!bool);
+        jButtonTutup.setEnabled(!bool);
     }
 
     /**
@@ -175,18 +190,38 @@ public class DialogKirimPesan extends javax.swing.JDialog {
             return;
         }
         
-        String[] nomors=jTextFieldNomorTujuan.getText().split(";");
+        SwingWorker<String,String> swingWorker=new SwingWorker<String, String>() {
 
-        Outbox outbox;
-        for(int i=0;i<nomors.length;i++){
-            outbox=new Outbox();
-            outbox.setDestinationNumber(nomors[i]);
-            outbox.setTextDecoded(jTextAreaPesan.getText());
-            App.getOutboxService().save(outbox);
-        }
+            @Override
+            protected String doInBackground() throws Exception {
+                busy(true);
+                String[] nomors=jTextFieldNomorTujuan.getText().split(";");
 
-        JOptionPane.showMessageDialog(rootPane, "Pesan Berhasil Dikirim");
-        this.dispose();
+                Outbox outbox;
+                for(int i=0;i<nomors.length;i++){
+                    outbox=new Outbox();
+                    outbox.setDestinationNumber(nomors[i]);
+                    outbox.setTextDecoded(jTextAreaPesan.getText());
+                    App.getOutboxService().save(outbox);
+                }
+                
+                return "Pesan Berhasil Dikirim";
+            }
+            
+            @Override
+            public void done(){
+                try{
+                    String pesan=get();
+                    JOptionPane.showMessageDialog(rootPane, pesan);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(rootPane, "Pesan Gagal Dikirim");
+                }finally{
+                    busy(false);
+                }
+            }
+        };
+        
+        swingWorker.execute();        
       
     }//GEN-LAST:event_jButtonKirimActionPerformed
 
