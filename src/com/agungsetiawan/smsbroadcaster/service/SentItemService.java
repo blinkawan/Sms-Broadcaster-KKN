@@ -48,7 +48,7 @@ public class SentItemService {
         
     }
     
-    public void delete(Long id){
+    public void delete(Long id) throws SQLException{
         try{
             connection.setAutoCommit(false);
             sentItemRepository.delete(id);
@@ -57,10 +57,11 @@ public class SentItemService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
+                           
+            throw new SQLException(ex.toString());
         }
     }
 }

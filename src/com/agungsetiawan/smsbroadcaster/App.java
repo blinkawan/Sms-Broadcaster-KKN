@@ -72,6 +72,7 @@ public class App {
             sentItemService.setDataSource(dataSource);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error : \n"+ex);
+            return;
         }
         
         try {

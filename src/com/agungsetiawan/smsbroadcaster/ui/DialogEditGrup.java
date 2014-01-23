@@ -100,6 +100,7 @@ public class DialogEditGrup extends javax.swing.JDialog {
             this.dispose();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane, "Data Gagal diubah");
+            
         }
        
 

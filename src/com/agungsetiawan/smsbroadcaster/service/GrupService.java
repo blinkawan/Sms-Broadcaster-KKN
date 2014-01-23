@@ -27,7 +27,7 @@ public class GrupService {
         }
     }
     
-    public void save(Grup grup){
+    public void save(Grup grup) throws SQLException{
         try{
             connection.setAutoCommit(false);
             grupRepository.save(grup);
@@ -36,14 +36,14 @@ public class GrupService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
+            throw new SQLException(ex.toString());
         }
     }
     
-    public void update(Grup grup){
+    public void update(Grup grup) throws SQLException{
         try{
             connection.setAutoCommit(false);
             grupRepository.update(grup);
@@ -52,10 +52,10 @@ public class GrupService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
+            throw new SQLException(ex.toString());
         }
     }
     
@@ -79,7 +79,7 @@ public class GrupService {
         
     }
     
-    public void delete(Long id){
+    public void delete(Long id) throws SQLException{
         try{
             connection.setAutoCommit(false);
             grupRepository.delete(id);
@@ -88,10 +88,10 @@ public class GrupService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
-            }
+            }                
+            throw new SQLException(ex.toString());
         }
     }
 }

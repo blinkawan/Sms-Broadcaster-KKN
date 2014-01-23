@@ -229,11 +229,17 @@ public class DialogKirimPesan extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonKirimActionPerformed
 
     private void jButtonKirimKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKirimKeActionPerformed
-        getRootPane().getGlassPane().setVisible(true);
-        dialogPilihNomor=new DialogPilihNomor(null, true);
-        dialogPilihNomor.setDialogKirimPesan(this);
-        dialogPilihNomor.setVisible(true);
-        getRootPane().getGlassPane().setVisible(false);
+        try{
+            getRootPane().getGlassPane().setVisible(true);
+            dialogPilihNomor=new DialogPilihNomor(null, true);
+            dialogPilihNomor.setDialogKirimPesan(this);
+            dialogPilihNomor.setVisible(true);
+            getRootPane().getGlassPane().setVisible(false);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Gagal Memuat Data Kontak");
+        }finally{
+            getRootPane().getGlassPane().setVisible(false);
+        }
     }//GEN-LAST:event_jButtonKirimKeActionPerformed
 
     /**

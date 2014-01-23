@@ -1,14 +1,11 @@
 
 package com.agungsetiawan.smsbroadcaster.service;
 
-import com.agungsetiawan.smsbroadcaster.App;
 import com.agungsetiawan.smsbroadcaster.entity.Kontak;
 import com.agungsetiawan.smsbroadcaster.repository.KontakRepository;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sql.DataSource;
 
 /**
@@ -31,7 +28,7 @@ public class KontakService {
         }
     }
     
-    public void save(Kontak kontak){
+    public void save(Kontak kontak) throws SQLException{
         try{
             connection.setAutoCommit(false);
             kontakRepository.save(kontak);
@@ -40,14 +37,14 @@ public class KontakService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
+             throw new SQLException(ex.toString());
         }
     }
     
-    public void update(Kontak kontak){
+    public void update(Kontak kontak) throws SQLException{
         try{
             connection.setAutoCommit(false);
             kontakRepository.update(kontak);
@@ -56,14 +53,14 @@ public class KontakService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
+            throw new SQLException(ex.toString());
         }
     }
     
-    public void delete(Long id){
+    public void delete(Long id) throws SQLException{
         try{
             connection.setAutoCommit(false);
             kontakRepository.delete(id);
@@ -72,10 +69,10 @@ public class KontakService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
+            throw new SQLException(ex.toString());
         }
     }
     

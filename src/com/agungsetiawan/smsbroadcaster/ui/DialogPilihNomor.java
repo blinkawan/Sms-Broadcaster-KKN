@@ -30,7 +30,7 @@ public class DialogPilihNomor extends javax.swing.JDialog {
     DefaultMutableTreeNode nodeKontak;
     DefaultMutableTreeNode nodeGrup;
     
-    public DialogPilihNomor(java.awt.Frame parent, boolean modal) {
+    public DialogPilihNomor(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
        
         root=new DefaultMutableTreeNode("Pilih Nomor");
@@ -42,7 +42,7 @@ public class DialogPilihNomor extends javax.swing.JDialog {
                 nodeKontak.add(new DefaultMutableTreeNode(k));
             }
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Kontak");
+            throw new Exception(ex.toString());
         }
         
         try{
@@ -52,7 +52,7 @@ public class DialogPilihNomor extends javax.swing.JDialog {
                 nodeGrup.add(new DefaultMutableTreeNode(g));
             }
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Grup");
+            throw new Exception(ex.toString());
         }
         
         root.add(nodeKontak);
@@ -187,44 +187,7 @@ public class DialogPilihNomor extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogPilihNomor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogPilihNomor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogPilihNomor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogPilihNomor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DialogPilihNomor dialog = new DialogPilihNomor(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonOk;
     private javax.swing.JButton jButtonTambahkan;

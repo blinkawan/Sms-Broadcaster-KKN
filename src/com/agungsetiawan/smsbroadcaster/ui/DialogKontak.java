@@ -32,7 +32,7 @@ public class DialogKontak extends javax.swing.JDialog {
         return jTable1;
     }
     
-    public DialogKontak(java.awt.Frame parent, boolean modal) {
+    public DialogKontak(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         
@@ -40,7 +40,8 @@ public class DialogKontak extends javax.swing.JDialog {
             kontakTableModel=new KontakTableModel(App.getKontakService().findAll());
             jTable1.setModel(kontakTableModel);
        }catch(Exception ex){
-           JOptionPane.showMessageDialog(parent, "Gagal Memuat Data Kontak");
+           ex.printStackTrace();
+           throw new Exception(ex.toString());
        }
        
         setLocationRelativeTo(null);
@@ -178,12 +179,18 @@ public class DialogKontak extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonHapusActionPerformed
 
     private void jButtonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTambahActionPerformed
-        // TODO add your handling code here:
-        getRootPane().getGlassPane().setVisible(true);
-        DialogTambahKontak dialogTambahKontak=new DialogTambahKontak(null, true);
-        dialogTambahKontak.setDialogKontak(this);
-        dialogTambahKontak.setVisible(true);
-        getRootPane().getGlassPane().setVisible(false);
+        try{
+            getRootPane().getGlassPane().setVisible(true);
+            DialogTambahKontak dialogTambahKontak=new DialogTambahKontak(null, true);
+            dialogTambahKontak.setDialogKontak(this);
+            dialogTambahKontak.setVisible(true);
+            getRootPane().getGlassPane().setVisible(false);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Gagal Memuat Data Grup");
+
+        }finally{
+            getRootPane().getGlassPane().setVisible(false);
+        }
     }//GEN-LAST:event_jButtonTambahActionPerformed
 
     private void jButtonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUbahActionPerformed
@@ -195,55 +202,28 @@ public class DialogKontak extends javax.swing.JDialog {
             return;
         }
         
-        getRootPane().getGlassPane().setVisible(true);
-        DialogEditKontak dialogEditKontak=new DialogEditKontak(null, true);
-        dialogEditKontak.setDialogKontak(this);
-        dialogEditKontak.setVisible(true);
-        getRootPane().getGlassPane().setVisible(false);
+        
+        try{
+            getRootPane().getGlassPane().setVisible(true);    
+            DialogEditKontak dialogEditKontak=new DialogEditKontak(null, true);
+            dialogEditKontak.setDialogKontak(this);
+            dialogEditKontak.setVisible(true);
+            getRootPane().getGlassPane().setVisible(false);
+        
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Gagal Memuat Data Grup");
+        }finally{
+            getRootPane().getGlassPane().setVisible(false);
+        }
+        
+        
         
     }//GEN-LAST:event_jButtonUbahActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogKontak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogKontak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogKontak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogKontak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DialogKontak dialog = new DialogKontak(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonHapus;
     private javax.swing.JButton jButtonTambah;

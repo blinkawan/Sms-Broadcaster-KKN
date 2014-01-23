@@ -5,16 +5,12 @@ import IconMakeOver.IconLabel;
 import com.agungsetiawan.smsbroadcaster.backgroundservice.BackgroundService;
 import com.agungsetiawan.smsbroadcaster.custom.JButtonTransparant;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
@@ -302,25 +298,44 @@ public class FormUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMenuKirimPesanActionPerformed
 
     private void jButtonMenuKotakKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuKotakKeluarActionPerformed
-        // TODO add your handling code here:
-        getRootPane().getGlassPane().setVisible(true);
-        DialogPesanTerkirim dialogPesanTerkirim=new DialogPesanTerkirim(this, true);
-        dialogPesanTerkirim.setVisible(true);
-        getRootPane().getGlassPane().setVisible(false);
+        try{
+            getRootPane().getGlassPane().setVisible(true);
+            DialogPesanTerkirim dialogPesanTerkirim=new DialogPesanTerkirim(this, true);
+            dialogPesanTerkirim.setVisible(true);
+            getRootPane().getGlassPane().setVisible(false);
+        }catch(Exception ex){
+          JOptionPane.showMessageDialog(null, "Gagal Memuat Data Pesan Terkirim");
+
+        }finally{
+            getRootPane().getGlassPane().setVisible(false);
+        }
+        
     }//GEN-LAST:event_jButtonMenuKotakKeluarActionPerformed
 
     private void jButtonMenuKontakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuKontakActionPerformed
-        getRootPane().getGlassPane().setVisible(true);
-        DialogKontak dialogKontak=new DialogKontak(this, true);
-        dialogKontak.setVisible(true);
-        getRootPane().getGlassPane().setVisible(false);
+        try{
+            getRootPane().getGlassPane().setVisible(true);
+            DialogKontak dialogKontak=new DialogKontak(this, true);
+            dialogKontak.setVisible(true);
+            getRootPane().getGlassPane().setVisible(false);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Gagal Memuat Data Kontak");
+        }finally{
+            getRootPane().getGlassPane().setVisible(false);
+        }
     }//GEN-LAST:event_jButtonMenuKontakActionPerformed
 
     private void jButtonMenuGrupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuGrupActionPerformed
-        getRootPane().getGlassPane().setVisible(true);
-        DialogGrup dialogGrup=new DialogGrup(this, true);
-        dialogGrup.setVisible(true);
-        getRootPane().getGlassPane().setVisible(false);
+        try{
+            getRootPane().getGlassPane().setVisible(true);
+            DialogGrup dialogGrup=new DialogGrup(this, true);
+            dialogGrup.setVisible(true);
+            getRootPane().getGlassPane().setVisible(false);
+        }catch(Exception ex){
+           JOptionPane.showMessageDialog(null, "Gagal Memuat Data Grup");
+        }finally{
+            getRootPane().getGlassPane().setVisible(false);
+        }
     }//GEN-LAST:event_jButtonMenuGrupActionPerformed
 
     private void jButtonTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTentangActionPerformed

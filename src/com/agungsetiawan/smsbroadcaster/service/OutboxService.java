@@ -26,7 +26,7 @@ public class OutboxService {
         }
     }
     
-    public void save(Outbox outbox){
+    public void save(Outbox outbox) throws SQLException{
         try{
             connection.setAutoCommit(false);
             outboxRepository.save(outbox);
@@ -35,10 +35,10 @@ public class OutboxService {
         }catch(SQLException ex){
             try{
                 connection.rollback();
-                throw new SQLException(ex.toString());
             }catch(SQLException e){
                 e.printStackTrace();
             }
+            throw new SQLException(ex.toString());
         }
     }
 }
