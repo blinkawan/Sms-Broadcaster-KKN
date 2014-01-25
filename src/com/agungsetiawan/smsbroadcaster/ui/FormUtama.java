@@ -66,13 +66,6 @@ public class FormUtama extends javax.swing.JFrame {
                            jButtonServisGammu.setText("Hentikan servis Gammu");
                         }
                         
-                        if(backgroundService.checkStatus("MySQL")==1){
-                           jLabelServisMySQL.setText("Servis MySQL Berhenti");
-                           jButtonServisMySQL.setText("Jalankan servis MySQL");
-                        }else if(backgroundService.checkStatus("MySQL")==4){
-                           jLabelServisMySQL.setText("Servis MySQL Berjalan");
-                           jButtonServisMySQL.setText("Hentikan servis MySQL");
-                        }
                         
                         Thread.sleep(1000);
                     } catch (InterruptedException ex) {
@@ -108,8 +101,6 @@ public class FormUtama extends javax.swing.JFrame {
         jButtonTentang = new JButtonTransparant();
         jLabelServisGammu = new javax.swing.JLabel();
         jButtonServisGammu = new JButtonTransparant();
-        jButtonServisMySQL = new JButtonTransparant();
-        jLabelServisMySQL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SMS Broadcast");
@@ -207,17 +198,6 @@ public class FormUtama extends javax.swing.JFrame {
             }
         });
 
-        jButtonServisMySQL.setText("jButton1");
-        jButtonServisMySQL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonServisMySQLActionPerformed(evt);
-            }
-        });
-
-        jLabelServisMySQL.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabelServisMySQL.setForeground(new java.awt.Color(255, 51, 51));
-        jLabelServisMySQL.setText("jLabel4");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -232,15 +212,12 @@ public class FormUtama extends javax.swing.JFrame {
                             .addComponent(jButtonMenuKontak, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonMenuKirimPesan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonMenuKotakKeluar, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(jButtonMenuGrup, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelServisMySQL)
-                            .addComponent(jButtonServisMySQL, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonMenuKotakKeluar, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                .addComponent(jButtonMenuGrup, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
                             .addComponent(jLabelServisGammu)
-                            .addComponent(jButtonServisGammu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonServisGammu, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -250,27 +227,20 @@ public class FormUtama extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonMenuKirimPesan, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonMenuKotakKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonMenuGrup, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonMenuKontak, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonMenuKirimPesan, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonMenuKotakKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jButtonTentang, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelServisGammu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonServisGammu)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonMenuGrup, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonMenuKontak, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabelServisMySQL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonServisMySQL)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(jButtonTentang)
                 .addContainerGap())
         );
 
@@ -362,22 +332,6 @@ public class FormUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonServisGammuActionPerformed
 
-    private void jButtonServisMySQLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServisMySQLActionPerformed
-        if(jButtonServisMySQL.getText().equals("Jalankan servis MySQL")){
-            try {
-                Process process=Runtime.getRuntime().exec("sc start MySQL");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }else if(jButtonServisMySQL.getText().equals("Hentikan servis MySQL")){
-            try {
-                Process process=Runtime.getRuntime().exec("sc stop MySQL");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }//GEN-LAST:event_jButtonServisMySQLActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -418,13 +372,11 @@ public class FormUtama extends javax.swing.JFrame {
     private javax.swing.JButton jButtonMenuKontak;
     private javax.swing.JButton jButtonMenuKotakKeluar;
     private javax.swing.JButton jButtonServisGammu;
-    private javax.swing.JButton jButtonServisMySQL;
     private javax.swing.JButton jButtonTentang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelServisGammu;
-    private javax.swing.JLabel jLabelServisMySQL;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

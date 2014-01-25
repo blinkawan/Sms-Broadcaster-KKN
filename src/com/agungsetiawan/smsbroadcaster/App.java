@@ -7,11 +7,9 @@ import com.agungsetiawan.smsbroadcaster.service.OutboxService;
 import com.agungsetiawan.smsbroadcaster.service.SentItemService;
 import com.agungsetiawan.smsbroadcaster.ui.FormUtama;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
