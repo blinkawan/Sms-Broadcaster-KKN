@@ -30,7 +30,7 @@ public class FormUtama extends javax.swing.JFrame {
         IconLabel ilVLC = new IconLabel();
         ilVLC.setForeground(new Color(255, 255, 255));
         ilVLC.setIconReflect(new ImageIcon(FormUtama.class.getResource("undip_150x175.png")));
-        ilVLC.setBounds(490, 100, 180, 413);
+        ilVLC.setBounds(410, 100, 180, 413);
         jPanel1.add(ilVLC); 
                         
         JLabel jLabel=new JLabel();
@@ -104,7 +104,6 @@ public class FormUtama extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SMS Broadcast");
-        setPreferredSize(new java.awt.Dimension(732, 470));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 0));
 
